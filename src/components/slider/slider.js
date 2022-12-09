@@ -24,7 +24,7 @@ export const Slider = ({ sliderId }) => {
 
     useEffect(() => {
         fetchSlider(dispatch, sliderId);
-    }, [dispatch]);
+    }, [dispatch, sliderId]);
 
     return (
         <div className='col-12 p-0 slider'>
