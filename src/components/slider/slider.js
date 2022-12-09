@@ -2,16 +2,29 @@ import './Slider.scss';
 import SliderItem from './SliderItem';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { types, useSlider } from '../../context/SliderContext';
 
-const request = async () => {
-    const url = await axios.get("https://www.namava.ir/api/v1.0/medias/sliders/1316");
-    console.log(url['data']);
+
+const fetchSlider = async (dispatch, sliderId) => {
+    dispatch({
+        type: types.SET_LOADING
+    });
+    const { data: { succeeded, result, errors } } = await axios.get(`https://www.namava.ir/api/v1.0/medias/sliders/${sliderId}`);
+    dispatch({
+        type: types.SET_ITEMS,
+        item: result,
+        id: sliderId
+    })
 }
-export const Slider = () => {
+export const Slider = ({ sliderId }) => {
+
+    const { state, dispatch } = useSlider();
+
+    console.log("gfgg", state)
 
     useEffect(() => {
-        request();
-    });
+        fetchSlider(dispatch, sliderId);
+    }, [dispatch]);
 
     return (
         <div className='col-12 p-0 slider'>

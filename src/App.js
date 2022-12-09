@@ -1,14 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import './style.scss';
+import Provider from './utils/Provider';
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-      </Routes>
-    </Router>
+    <Provider>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

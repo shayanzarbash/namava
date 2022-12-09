@@ -5,7 +5,7 @@ const Home = () => {
         <div>
             <div className="container-fluid">
                 <div className="row">
-                    <Slider />
+                    <Slider sliderId={1316} />
                 </div>
             </div>
         </div>
