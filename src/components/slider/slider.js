@@ -3,13 +3,15 @@ import SliderItem from './SliderItem';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { types, useSlider } from '../../context/SliderContext';
-
+import Guide from '../../utils/Guide';
 
 const fetchSlider = async (dispatch, sliderId) => {
     dispatch({
         type: types.SET_LOADING
     });
-    const { data: { succeeded, result, errors } } = await axios.get(`https://www.namava.ir/api/v1.0/medias/sliders/${sliderId}`);
+
+    const { data: { succeeded, result, errors } } = await Guide.get(`api/v1.0/medias/sliders/${sliderId}`);
+
     dispatch({
         type: types.SET_ITEMS,
         item: result,
