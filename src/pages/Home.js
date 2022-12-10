@@ -3,8 +3,8 @@ import Slider from "../components/slider/Slider";
 const Home = () => {
     return (
         <div>
-            <div className="container-fluid">
-                <div className="row">
+            <div className="">
+                <div className="">
                     <Slider sliderId={1316} />
                 </div>
             </div>
