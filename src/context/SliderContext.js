@@ -3,9 +3,9 @@ import { createContext, useContext, useReducer } from "react";
 const SliderContext = createContext(null);
 
 const initState = {
-    id: null,
+    id: undefined,
     items: [],
-    isLoding: false,
+    loading: false,
     errors: [],
     succeeded: false,
     currentSlide: 0,
@@ -41,6 +41,7 @@ const reducer = (state, action) => {
         default:
             throw Error("An Error");
     }
+    return state;
 }
 
 const SliderProvider = ({ children }) => {

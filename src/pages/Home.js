@@ -5,7 +5,7 @@ const Home = () => {
         <div>
             <div className="">
                 <div className="">
-                    <Slider sliderId={1316} />
+                    <Slider sliderID={1316} />
                 </div>
             </div>
         </div>
