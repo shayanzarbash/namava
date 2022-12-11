@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { getNamavaUrl } from '../../utils/Functions';
 
 const Slide = styled.div`
 width: 100%;
@@ -13,14 +14,14 @@ background-image: linear-gradient(rgba(18, 18, 18, 0) 10vw, rgb(18, 18, 18) 46.8
  padding-bottom: 40px;
 `;
 
-const SliderItem = () => {
+const SliderItem = ({ slider, className }) => {
 
     return (
-        <div className='slider-container'>
-            <Slide imageUrl={"https://static.namava.ir/Content/Upload/Images/e81e22fe-f7d4-4781-81ad-d16b06bf8006.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=900"}>
+        <div className={`slider-container ${className}`}>
+            <Slide imageUrl={getNamavaUrl(slider['coverLandscape'])}>
 
             </Slide>
-        </div>
+        </div >
     )
 }
 

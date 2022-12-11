@@ -65,7 +65,30 @@ const useSlider = () => {
 
     let { state, dispatch } = context;
 
-    return { state, dispatch }
+
+    const nextSlide = () => {
+        let previousSlide = state.currentSlide;
+        let currentSlide = (state.currentSlide + 1) % state.items.lenght;
+
+        dispatch({
+            type: types.SET_SLIDE,
+            previousSlide,
+            currentSlide
+        });
+    };
+
+    const previousSlide = () => {
+        let previousSlide = state.currentSlide;
+        let currentSlide = (state.currentSlide + state.items.lenght - 1) % state.items.lenght;
+
+        dispatch({
+            type: types.SET_SLIDE,
+            previousSlide,
+            currentSlide
+        });
+    }
+
+    return { state, dispatch, nextSlide, previousSlide }
 };
 
 export { SliderProvider, useSlider };
