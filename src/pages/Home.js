@@ -1,4 +1,4 @@
-import Slider from "../components/slider/Sliders";
+import Slider from "../components/slider/Slider";
 
 const Home = () => {
     return (
