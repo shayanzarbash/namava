@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components';
 import { getNamavaUrl } from '../../utils/Functions';
 
@@ -21,7 +20,7 @@ const SliderItem = ({ slider, className }) => {
             <Slide imageUrl={getNamavaUrl(slider['coverLandscape'])}>
 
             </Slide>
-        </div >
+        </div>
     )
 }
 
