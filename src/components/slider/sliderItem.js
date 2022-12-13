@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getNamavaUrl } from '../../utils/Functions';
+import ActionButton from '../ActionButton';
 
 const Slide = styled.div`
 width: 100%;
@@ -18,7 +20,19 @@ const SliderItem = ({ slider, className }) => {
     return (
         <div className={`slider-container ${className}`}>
             <Slide imageUrl={getNamavaUrl(slider['coverLandscape'])}>
-
+                <div className="slide-info-container">
+                    {slider['logoImageUrl'] && (
+                        <Link to="#">
+                            <img src={getNamavaUrl(slider['logoImageUrl'])} alt={slider.title} className="logo-image" />
+                        </Link>
+                    )}
+                    {slider['title'] && (
+                        <h2 className='title'>
+                            {slider.title}
+                        </h2>
+                    )}
+                    <ActionButton item={slider} />
+                </div>
             </Slide>
         </div>
     )
