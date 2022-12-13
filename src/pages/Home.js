@@ -1,4 +1,4 @@
-import Slider from "../components/slider/Slider";
+import Slider from "../components/slider/Sliders";
 
 const Home = () => {
     return (
@@ -10,6 +10,6 @@ const Home = () => {
             </div>
         </div>
     )
-}
+};
 
 export default Home;
