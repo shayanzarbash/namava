@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "flickity": "^3.0.0",
     "moment": "^2.29.4",
     "moment-jalaali": "^0.9.6",
     "node-sass": "^8.0.0",
