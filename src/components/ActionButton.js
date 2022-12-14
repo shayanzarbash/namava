@@ -2,12 +2,10 @@ import './ActionButtons.scss';
 import Config from '../Config';
 import momentj from 'moment-jalaali';
 import fa from 'moment/locale/fa';
+import 'moment-timezone';
 
 const ActionButton = ({ item }) => {
-
-
     let buttons = [];
-
     if (item['publishInFuture'] === true) {
         momentj.locale("fa", fa);
         momentj.loadPersian({

@@ -55,7 +55,6 @@ const SliderProvider = ({ children }) => {
     )
 };
 
-
 const useSlider = () => {
     let context = useContext(SliderContext);
 
@@ -64,7 +63,6 @@ const useSlider = () => {
     }
 
     let { state, dispatch } = context;
-
 
     const nextSlide = () => {
         let previousSlide = state.currentSlide;
@@ -75,6 +73,7 @@ const useSlider = () => {
             currentSlide
         })
     }
+
     const previousSlide = () => {
         let previousSlide = state.currentSlide;
         let currentSlide = (state.currentSlide + state.items.length - 1) % state.items.length;
