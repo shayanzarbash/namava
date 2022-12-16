@@ -31,7 +31,7 @@ const reducer = (state, action) => {
             break;
 
         case types.SET_ERROR:
-            state = { ...state, loading: true, errors: action.errors, items: [], succeeded: false };
+            state = { ...state, loading: false, errors: action.errors, items: [], succeeded: false };
             break;
 
         case types.SET_SLIDE:

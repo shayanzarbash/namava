@@ -6,9 +6,10 @@ import './RowList.scss';
 import Flickity from 'flickity';
 import Guide from '../../utils/Guide';
 
-const fetchData = async (setItems, setLoading, setError) => {
+const fetchData = async (payloadKey, setItems, setLoading, setError) => {
+    console.log("paykey", payloadKey)
     setLoading(true);
-    let { data } = await Guide.get('api/v1.0/post-groups/1263/medias?pi=1&ps=20');
+    let { data } = await Guide.get(`api/v1.0/post-groups/${payloadKey}/medias?pi=1&ps=20`);
     setLoading(false);
     if (data['succeeded'] === true) {
         setItems(data['result']);
@@ -16,7 +17,9 @@ const fetchData = async (setItems, setLoading, setError) => {
 }
 
 
-const RowList = ({ className, data }) => {
+const RowList = ({ className, data: { payloadType, payloadKey, title } }) => {
+
+    console.log("row", payloadKey)
 
     const flickityRef = createRef();
 
@@ -26,7 +29,7 @@ const RowList = ({ className, data }) => {
 
     useEffect(() => {
         if (items.length === 0 && loading === false && error === false) {
-            fetchData(setItems, setLoading, setError);
+            fetchData(payloadKey, setItems, setLoading, setError);
         }
     }, [loading, items]);
 
@@ -57,7 +60,7 @@ const RowList = ({ className, data }) => {
     return (
         <div className={`row-list col-12 p-0 ${className}`}>
             <div className='row-title'>
-                <h3>فیلم ویژه</h3>
+                <h3>{title}</h3>
                 <Link className='more-link'>
                     <span>مشاهده همه</span>
                 </Link>
@@ -69,7 +72,7 @@ const RowList = ({ className, data }) => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     )
 
 }

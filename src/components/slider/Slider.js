@@ -9,6 +9,7 @@ const fetchSlider = async (dispatch, sliderID) => {
     dispatch({ type: types.SET_LOADING });
     let url = (Config.Slider.url).replace('{{SLIDER_ID}}', sliderID);
     let { data: { succeeded, result, errors } } = await Guide.get(url);
+
     if (succeeded) {
         dispatch({
             type: types.SET_ITEMS,
@@ -36,7 +37,7 @@ const Slider = ({ sliderID }) => {
         let sliderTimeHandler = undefined;
         sliderTimeHandler = setTimeout(() => {
             nextSlide();
-        }, 3000);
+        }, 6000);
 
         return () => {
             clearTimeout(sliderTimeHandler);
