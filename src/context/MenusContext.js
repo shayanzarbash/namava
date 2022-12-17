@@ -55,8 +55,6 @@ const useMenus = () => {
 
     let { state, dispatch } = context;
 
-    console.log(state)
-
     return { state, dispatch, }
 };
 

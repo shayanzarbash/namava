@@ -5,44 +5,43 @@ import { useMenus } from "../context/MenusContext";
 import { useEffect } from "react";
 import { types } from "../context/MenusContext";
 import Guide from "../utils/Guide";
+import MovieItem from "../components/MovieItem";
+import Config from "../Config";
 
+//تابعی برای درخواست میباست به صورت ناهمزمان باشد تا در خواست منتظر بماند تا بگیرد
 let fetchMenus = async (dispatch) => {
+    // درخواستی ارسال میشود 
     dispatch({ type: types.SET_LOADING });
-    const { data: { succeeded, result, error } } = await Guide.get('api/v1.0/menus');
-    console.log("res", result);
+    // درخواست برای دیتاگیری این سه آیتم برای API میباشند
+    const { data: { succeeded, result, error } } = await Guide.get('api/v3.0/menus');
+    // شرطی برای استفاده از دیتا اگر دیتا با موفقیت دریافت شده باشد
     if (succeeded === true && error === null) {
         const homePageIndex = result.findIndex(item => item.slug === "index");
         let home = {};
         if (homePageIndex > -1) {
             home = result[homePageIndex];
         }
+        // ارسال درخواست برای ردیوسر که توسط تایپ دیتا هارا به ردیوسر میبرد
         dispatch({
             type: types.SET_DATA,
             home: home,
             data: result
         });
-
     } else {
+        // اگر دیتا با موفقیت نیامد این درخواست ارسال شود
         dispatch({ type: types.SET_ERROR, errors: error });
     }
-
 }
 
 const Home = () => {
 
-
-
-    let { state: menus, dispatch } = useMenus();
-
+    // چیزهایی که از استیت میخواهیم بگیریم هوک درخواستی ما
+    const { state: menus, dispatch } = useMenus();
 
     useEffect(() => {
         // هنوز درخواستی داده نشده پس درخواست میدهیم
-
         fetchMenus(dispatch);
-
-    }, [dispatch])
-
-    console.log("menus", menus.home)
+    }, [dispatch]);
 
 
     return (
@@ -52,19 +51,19 @@ const Home = () => {
                     {(menus.loading === false && menus.succeeded === true)
                         && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
                             let section = undefined;
-
                             // eslint-disable-next-line default-case
                             switch (payloadType) {
-                                case "Slider":
+                                case Config.pageItemsType.Slider:
                                     section = <Slider key={`page-section-${pageItem.pageItemId}`} sliderID={payloadKey} />;
                                     break;
 
-                                case "PostGroup":
+                                case Config.pageItemsType.PostGroup:
+                                    let itemComponent = MovieItem;
                                     section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
                                         title: pageItem.caption
-                                    }} />;
+                                    }} ItemComponent={itemComponent} />;
                                     break;
 
                             }

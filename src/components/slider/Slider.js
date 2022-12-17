@@ -7,7 +7,7 @@ import Config from '../../Config';
 
 const fetchSlider = async (dispatch, sliderID) => {
     dispatch({ type: types.SET_LOADING });
-    let url = (Config.Slider.url).replace('{{SLIDER_ID}}', sliderID);
+    let url = (Config.sections.Slider.url).replace('{{SLIDER_ID}}', sliderID);
     let { data: { succeeded, result, errors } } = await Guide.get(url);
 
     if (succeeded) {

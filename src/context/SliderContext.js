@@ -21,7 +21,6 @@ export const types = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-
         case types.SET_LOADING:
             state = { ...state, loading: true };
             break;
@@ -41,6 +40,7 @@ const reducer = (state, action) => {
         default:
             throw Error("An Error");
     }
+
     return state;
 }
 
@@ -71,7 +71,7 @@ const useSlider = () => {
             type: types.SET_SLIDE,
             previousSlide,
             currentSlide
-        })
+        });
     }
 
     const previousSlide = () => {

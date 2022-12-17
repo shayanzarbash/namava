@@ -1,25 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import MovieItem from '../MovieItem';
 import './RowList.scss';
 import Flickity from 'flickity';
-import Guide from '../../utils/Guide';
-
-const fetchData = async (payloadKey, setItems, setLoading, setError) => {
-    console.log("paykey", payloadKey)
-    setLoading(true);
-    let { data } = await Guide.get(`api/v1.0/post-groups/${payloadKey}/medias?pi=1&ps=20`);
-    setLoading(false);
-    if (data['succeeded'] === true) {
-        setItems(data['result']);
-    }
-}
+import { fetchData } from '../../utils/Functions';
 
 
-const RowList = ({ className, data: { payloadType, payloadKey, title } }) => {
 
-    console.log("row", payloadKey)
+const RowList = ({ className, data: { payloadType, payloadKey, title }, ItemComponent }) => {
 
     const flickityRef = createRef();
 
@@ -28,13 +16,20 @@ const RowList = ({ className, data: { payloadType, payloadKey, title } }) => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
+
         if (items.length === 0 && loading === false && error === false) {
-            fetchData(payloadKey, setItems, setLoading, setError);
+            fetchData(payloadType, (result) => {
+                console.log("res", result);
+                setItems(result);
+            }, (error) => {
+                setError(error);
+            }, (isLoading) => {
+                setLoading(isLoading);
+            });
         }
     }, [loading, items]);
 
     useEffect(() => {
-
         let flickityHandler = undefined;
         let elem = flickityRef.current.querySelector('.list');
         if (flickityRef.current && elem) {
@@ -45,10 +40,10 @@ const RowList = ({ className, data: { payloadType, payloadKey, title } }) => {
                 cellAlign: 'right',
                 rightToLeft: true,
                 groupCells: true
-
             });
         }
 
+        // موقع نابودی درخواست (باید نابود شوند )
         return () => {
             if (flickityHandler) {
                 flickityHandler.remove();
@@ -66,13 +61,14 @@ const RowList = ({ className, data: { payloadType, payloadKey, title } }) => {
                 </Link>
             </div>
             <div className='list-container' ref={flickityRef}>
+                {/* برای نمایش دیتا درون آرایه ای باید مپ کرد و توسط شرط هایی  */}
                 {(items.length > 0 && loading === false) && (
                     <div className='d-flex list'>
-                        {items.map(item => (<MovieItem key={`row-list-${item.id}`} item={item} />))}
+                        {items.map(item => (<ItemComponent key={`row-list-${item.id}`} item={item} />))}
                     </div>
                 )}
             </div>
-        </div >
+        </div>
     )
 
 }
