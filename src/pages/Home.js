@@ -7,6 +7,7 @@ import { types } from "../context/MenusContext";
 import Guide from "../utils/Guide";
 import MovieItem from "../components/MovieItem";
 import Config from "../Config";
+import { getItemComponent } from "../utils/Functions";
 
 //تابعی برای درخواست میباست به صورت ناهمزمان باشد تا در خواست منتظر بماند تا بگیرد
 let fetchMenus = async (dispatch) => {
@@ -57,9 +58,10 @@ const Home = () => {
                                 case Config.pageItemsType.Slider:
                                     section = <Slider key={`page-section-${pageItem.pageItemId}`} sliderID={payloadKey} />;
                                     break;
-
+                                case Config.pageItemsType.Latest:
+                                case Config.pageItemsType.LatestEpisods:
                                 case Config.pageItemsType.PostGroup:
-                                    let itemComponent = MovieItem;
+                                    let itemComponent = getItemComponent(payloadType);
                                     section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
@@ -69,7 +71,6 @@ const Home = () => {
 
                             }
                             return section;
-                            // eslint-disable-next-line no-unreachable
                         })}
                 </div>
             </div>

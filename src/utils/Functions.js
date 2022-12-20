@@ -1,5 +1,7 @@
+// Write all share functions in our App
 import Config from '../Config';
 import Guide from './Guide';
+import MovieItem from "../components/MovieItem";
 
 export function getNamavaUrl(url) {
     return `https://www.namava.ir${url}`;
@@ -11,29 +13,20 @@ export const fetchData = async (payloadType, payloadKey, onSuccess, onError, set
         setLoading(true);
     }
     let section = Config.sections[payloadType];
-
     if (section === undefined || section.url === null) {
         if (setLoading) {
             setLoading(false)
         }
-
         onError(`error${payloadType}`);
-
         return;
     }
-
     let url = section.url.replace('{{PEYLOAD_KEY}}', payloadKey);
-
-
     let { data: { succeeded, result, error } } = await Guide.get(url, {
         params: {
             pi: Config.sections[payloadType].pi || undefined,
             ps: Config.sections[payloadType].ps || undefined,
         }
-
     });
-
-
 
     if (setLoading) {
         setLoading(false);
@@ -46,3 +39,21 @@ export const fetchData = async (payloadType, payloadKey, onSuccess, onError, set
         onError(error);
     }
 }
+
+// نوشتن تابعی برای رفتن به حالات دیگر آیتم ها
+export const getItemComponent = (payloadType) => {
+    console.log("pay", payloadType)
+    switch (payloadType) {
+        case Config.pageItemsType.Latest:
+        case Config.pageItemsType.LatestEpisods:
+        case Config.pageItemsType.PostGroup:
+            return MovieItem;
+
+        default:
+            return undefined;
+    }
+}
+
+
+
+
