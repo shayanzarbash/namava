@@ -28,7 +28,7 @@ export default {
             url: "api/v1.0/medias/sliders/{{SLIDER_ID}}"
         },
         [pageItemsType.PostGroup]: {
-            url: 'api/v1.0/post-groups/{{PAYLOAD_KEY}}/medias',
+            url: 'api/v1.0/post-groups/{{PEYLOAD_KEY}}/medias',
             pi: 1,
             ps: 20
         }

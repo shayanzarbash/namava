@@ -50,6 +50,7 @@ const Home = () => {
                 <div className="">
                     {(menus.loading === false && menus.succeeded === true)
                         && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
+
                             let section = undefined;
                             // eslint-disable-next-line default-case
                             switch (payloadType) {
@@ -68,6 +69,7 @@ const Home = () => {
 
                             }
                             return section;
+                            // eslint-disable-next-line no-unreachable
                         })}
                 </div>
             </div>
