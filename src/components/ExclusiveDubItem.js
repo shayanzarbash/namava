@@ -1,6 +1,6 @@
 import React from 'react';
 import { getNamavaUrl } from '../utils/Functions';
-import './MovieItem.scss';
+import './ExclusiveDubItem.scss';
 import { ImageRealLazyLoad } from 'real-react-lazyload';
 
 const getCaption = (info) => {
@@ -15,9 +15,9 @@ const getCaption = (info) => {
     return caption;
 }
 
-const MovieItem = ({ item, placeholder = false }) => {
+const ExclusiveDubItem = ({ item, placeholder = false }) => {
     return (
-        <div className='movie-item'>
+        <div className='exclusive-dub-item'>
             <div className='item-image'>
                 {placeholder === false && (
                     <ImageRealLazyLoad src={getNamavaUrl(item['imageUrl'] || item['seriesImageUrl'])} alt={item.caption} />
@@ -31,4 +31,4 @@ const MovieItem = ({ item, placeholder = false }) => {
 }
 
 
-export default MovieItem;
+export default ExclusiveDubItem;

@@ -5,9 +5,9 @@ import { useMenus } from "../context/MenusContext";
 import { useEffect } from "react";
 import { types } from "../context/MenusContext";
 import Guide from "../utils/Guide";
-import MovieItem from "../components/MovieItem";
 import Config from "../Config";
 import { getItemComponent } from "../utils/Functions";
+import AdsItem from "../components/AdsItem";
 
 //تابعی برای درخواست میباست به صورت ناهمزمان باشد تا در خواست منتظر بماند تا بگیرد
 let fetchMenus = async (dispatch) => {
@@ -60,6 +60,8 @@ const Home = () => {
                                     break;
                                 case Config.pageItemsType.Latest:
                                 case Config.pageItemsType.LatestEpisods:
+                                case Config.pageItemsType.CategoryGroup:
+                                case Config.pageItemsType.ExclusiveDubs:
                                 case Config.pageItemsType.PostGroup:
                                     let itemComponent = getItemComponent(payloadType);
                                     section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
@@ -69,6 +71,15 @@ const Home = () => {
                                     }} ItemComponent={itemComponent} />;
                                     break;
 
+                                case Config.pageItemsType.Advertisement:
+                                    section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
+                                        payloadType,
+                                        payloadKey,
+                                    }} ItemComponent={AdsItem} />
+                                    break;
+
+                                default:
+                                    section = undefined;
                             }
                             return section;
                         })}

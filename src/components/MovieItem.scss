@@ -13,6 +13,11 @@
         direction: rtl;
         color: white;
 
+        .item-list-title {
+            display: flex;
+            flex-direction: column;
+        }
+
         .episode-title {
             color: #aaaaaa;
         }
@@ -20,11 +25,11 @@
 
     position: relative;
     transform: translateY(0px);
-    transition: transform .25s;
+    transition: transform 0.25s;
 
     &:after {
         display: block;
-        content: '';
+        content: "";
         position: absolute;
         bottom: -15px;
         left: 25%;
@@ -33,14 +38,14 @@
         background: rgb(170, 170, 170);
         opacity: 0;
         border-radius: 4px;
-        transition: opacity .25s;
+        transition: opacity 0.25s;
     }
 
     &.active {
         transform: translateY(15px);
 
         &:after {
-            opacity: 1
+            opacity: 1;
         }
     }
 
@@ -108,5 +113,4 @@
             }
         }
     }
-
 }

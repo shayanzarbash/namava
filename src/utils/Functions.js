@@ -2,6 +2,7 @@
 import Config from '../Config';
 import Guide from './Guide';
 import MovieItem from "../components/MovieItem";
+import ExclusiveDubItem from '../components/ExclusiveDubItem';
 
 export function getNamavaUrl(url) {
     return `https://www.namava.ir${url}`;
@@ -42,12 +43,15 @@ export const fetchData = async (payloadType, payloadKey, onSuccess, onError, set
 
 // نوشتن تابعی برای رفتن به حالات دیگر آیتم ها
 export const getItemComponent = (payloadType) => {
-    console.log("pay", payloadType)
     switch (payloadType) {
         case Config.pageItemsType.Latest:
         case Config.pageItemsType.LatestEpisods:
+        case Config.pageItemsType.CategoryGroup:
         case Config.pageItemsType.PostGroup:
             return MovieItem;
+
+        case Config.pageItemsType.ExclusiveDubs:
+            return ExclusiveDubItem;
 
         default:
             return undefined;

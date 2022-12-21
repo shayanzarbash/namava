@@ -15,7 +15,6 @@ const types = {
 }
 
 let rowListReducer = (state, action) => {
-    console.log("action.type", action.type);
     switch (action.type) {
         case types.SET_LOADING:
             state = { ...state, loading: true };
@@ -50,13 +49,10 @@ const initialState = {
 
 
 const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, title }, ItemComponent, placeholder = false }, ref) => {
-
     const flickityRef = createRef();
-
     const [state, dispatch] = useReducer(rowListReducer, initialState, (initState) => initState);
-
     const { items, loading, error, fetchRequest } = state;
-
+    console.log("className,", className)
 
     useEffect(() => {
 
@@ -70,7 +66,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             }, (isLoading) => {
                 //setLoading(isLoading);
                 if (isLoading) {
-
                     dispatch({ type: types.SET_LOADING, loading: isLoading });
                 }
             });
@@ -127,7 +122,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
     let canIRender = items.length > 0 && error === false && loading === false;
 
     return (
-        <div ref={ref} className={`row - list col - 12 p - 0 ${className} `}>
+        <div ref={ref} className={`row-list col-12 p-0 ${className}`}>
             <div className='row-title'>
                 <h3>{title}</h3>
                 <Link className='more-link'>
