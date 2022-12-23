@@ -73,13 +73,13 @@ const Home = () => {
                                     break;
 
                                 case Config.pageItemsType.Advertisement:
-                                    section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
+                                    section = <RowList className="Advertisement" key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
                                     }} ItemComponent={AdsItem} />
                                     break;
                                 case Config.pageItemsType.BannerGroup:
-                                    section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
+                                    section = <RowList className="Banner" key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
                                     }} ItemComponent={BannerItem} />
