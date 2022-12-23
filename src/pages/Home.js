@@ -8,6 +8,7 @@ import Guide from "../utils/Guide";
 import Config from "../Config";
 import { getItemComponent } from "../utils/Functions";
 import AdsItem from "../components/AdsItem";
+import BannerItem from "../components/BannerItem";
 
 //تابعی برای درخواست میباست به صورت ناهمزمان باشد تا در خواست منتظر بماند تا بگیرد
 let fetchMenus = async (dispatch) => {
@@ -77,7 +78,12 @@ const Home = () => {
                                         payloadKey,
                                     }} ItemComponent={AdsItem} />
                                     break;
-
+                                case Config.pageItemsType.BannerGroup:
+                                    section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
+                                        payloadType,
+                                        payloadKey,
+                                    }} ItemComponent={BannerItem} />
+                                    break;
                                 default:
                                     section = undefined;
                             }

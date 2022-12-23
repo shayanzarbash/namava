@@ -9,7 +9,6 @@ export function getNamavaUrl(url) {
 }
 
 export const fetchData = async (payloadType, payloadKey, onSuccess, onError, setLoading,) => {
-
     if (setLoading) {
         setLoading(true);
     }
@@ -28,18 +27,40 @@ export const fetchData = async (payloadType, payloadKey, onSuccess, onError, set
             ps: Config.sections[payloadType].ps || undefined,
         }
     });
-
     if (setLoading) {
         setLoading(false);
     };
-
     if (succeeded === true) {
         onSuccess(result);
-
     } else {
         onError(error);
     }
 }
+
+export const fetchBriefData = async (id, onSuccess, onError, setLoading,) => {
+    if (setLoading) {
+        setLoading(true);
+    }
+    let section = Config.sections.BriefData;
+    if (section === undefined || section.url === null) {
+        if (setLoading) {
+            setLoading(false)
+        }
+        onError(`error`);
+        return;
+    }
+    let url = section.url.replace('{{ID}}', id);
+    let { data: { succeeded, result, error } } = await Guide.get(url);
+    if (setLoading) {
+        setLoading(false);
+    };
+    if (succeeded === true) {
+        onSuccess(result);
+    } else {
+        onError(error);
+    }
+}
+
 
 // نوشتن تابعی برای رفتن به حالات دیگر آیتم ها
 export const getItemComponent = (payloadType) => {

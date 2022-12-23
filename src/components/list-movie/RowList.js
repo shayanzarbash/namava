@@ -52,7 +52,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
     const flickityRef = createRef();
     const [state, dispatch] = useReducer(rowListReducer, initialState, (initState) => initState);
     const { items, loading, error, fetchRequest } = state;
-    console.log("className,", className)
 
     useEffect(() => {
 
