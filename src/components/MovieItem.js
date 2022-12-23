@@ -33,7 +33,6 @@ const MovieItem = ({ item, placeholder = false }) => {
         fetchBriefData(item['id'] || item['episodId'], (result) => setInfo(result), () => { });
     }
 
-    console.log("info", info)
 
 
 

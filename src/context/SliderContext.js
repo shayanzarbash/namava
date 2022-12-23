@@ -20,6 +20,9 @@ export const types = {
 }
 
 const reducer = (state, action) => {
+    console.log("redstate", state);
+    console.log("action", action)
+
     switch (action.type) {
         case types.SET_LOADING:
             state = { ...state, loading: true };
@@ -63,6 +66,7 @@ const useSlider = () => {
     }
 
     let { state, dispatch } = context;
+    console.log("slider", state)
 
     const nextSlide = () => {
         let previousSlide = state.currentSlide;
