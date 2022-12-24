@@ -50,6 +50,7 @@ const Home = () => {
                     {(menus.loading === false && menus.succeeded === true)
                         && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
                             let section = undefined;
+                            let preview = false;
                             // eslint-disable-next-line default-case
                             switch (payloadType) {
                                 case Config.pageItemsType.Slider:
@@ -60,8 +61,11 @@ const Home = () => {
                                 case Config.pageItemsType.CategoryGroup:
                                 case Config.pageItemsType.ExclusiveDubs:
                                 case Config.pageItemsType.PostGroup:
+                                    if (payloadType !== Config.pageItemsType.CategoryGroup) {
+                                        preview = true;
+                                    }
                                     let itemComponent = getItemComponent(payloadType);
-                                    section = <RowList className="PostGroup" key={`page-section-${pageItem.pageItemId}`} data={{
+                                    section = <RowList preview={preview} className="PostGroup" key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
                                         title: pageItem.caption
