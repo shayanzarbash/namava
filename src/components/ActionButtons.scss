@@ -1,8 +1,7 @@
 .actions {
-    margin-bottom: 20px;
-    margin-top: 30px;
+    margin-bottom: 18px;
     display: flex;
-    align-items: flex-start;
+    align-items: start;
     .button-box {
         display: inline-block;
         height: 40px;
@@ -26,7 +25,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        font: 12px iran;
+        font: 12px Shabnam;
         color: white;
         cursor: pointer;
         svg {
@@ -51,6 +50,7 @@
                 fill: #6eb8ff;
             }
         }
+
     }
     .download-button {
         display: flex;
@@ -65,7 +65,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        font: 12px iran;
+        font: 12px Shabnam;
         color: white;
         cursor: pointer;
         svg {
@@ -85,6 +85,7 @@
             background-color: #1993ff;
             border-color: #1993ff;
         }
+
     }
 
     .button-title {
@@ -93,7 +94,7 @@
         height: 100%;
         align-items: center;
         justify-content: center;
-        font: 12px iran;
+        font: 12px Shabnam;
         line-height: 40px;
         color: black;
     }
@@ -120,7 +121,7 @@
             height: 100%;
             align-items: center;
             justify-content: center;
-            font: 14px iran;
+            font: 14px Shabnam;
             color: black;
             font-weight: bold;
         }

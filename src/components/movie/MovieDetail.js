@@ -1,5 +1,28 @@
-import { Link } from 'react-router-dom';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import Config from '../../Config';
+import ActionButton from '../ActionButton';
 import './MovieDetail.scss';
+
+const getDefaultButton = (data) => {
+    return data.type !== Config.itemTypes.Series ? (
+        <div className="button-box" key={`button-${data["id"]}`}>
+            <div className="box-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                    className="Button-icon-0-1-58">
+                    <path
+                        d="M14.66 8.347l-8.537-4.93c-.502-.287-1.12-.286-1.62.005s-.81.825-.81 1.404v9.858c-.001.58.307 1.115.808 1.406s1.12.293 1.62.005l8.537-4.93a1.64 1.64 0 0 0 0-2.82z"></path>
+                </svg>
+                <div className="button-title">
+                    ورود و پخش فیلم
+                </div>
+            </div>
+        </div>
+    ) : (
+        <div className="button-box" key={`button-${data["id"]}`}>
+            <div className="button-title">قسمت ها</div>
+        </div>
+    )
+}
 
 const MovieDetail = () => {
     return (
@@ -72,6 +95,15 @@ const MovieDetail = () => {
                         </span>
                     </div>
 
+                </div>
+                <div className='detail-desciription'>
+                    <p>پس از اینکه دشمنان قدیمی یک عضو سابق مافیا، خانواده او را می کشند، او و دخترش تصمیم می گیرند به شهر میلان فرار کنند و نقشه ای برای انتقام از آنها می کشند و...</p>
+                </div>
+                <ActionButton item={{}} moreButton={true}
+                    defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
+                <div className='text-row'>
+                    <span>ستارگان : </span>
+                    <span>مدیدری</span>
                 </div>
             </div>
         </div>
