@@ -36,15 +36,12 @@ let fetchMenus = async (dispatch) => {
 }
 
 const Home = () => {
-
     // چیزهایی که از استیت میخواهیم بگیریم هوک درخواستی ما
     const { state: menus, dispatch } = useMenus();
-
     useEffect(() => {
         // هنوز درخواستی داده نشده پس درخواست میدهیم
         fetchMenus(dispatch);
     }, [dispatch]);
-
 
     return (
         <div>
@@ -52,7 +49,6 @@ const Home = () => {
                 <div className="">
                     {(menus.loading === false && menus.succeeded === true)
                         && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
-
                             let section = undefined;
                             // eslint-disable-next-line default-case
                             switch (payloadType) {
@@ -65,13 +61,12 @@ const Home = () => {
                                 case Config.pageItemsType.ExclusiveDubs:
                                 case Config.pageItemsType.PostGroup:
                                     let itemComponent = getItemComponent(payloadType);
-                                    section = <RowList key={`page-section-${pageItem.pageItemId}`} data={{
+                                    section = <RowList className="PostGroup" key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,
                                         payloadKey,
                                         title: pageItem.caption
                                     }} ItemComponent={itemComponent} />;
                                     break;
-
                                 case Config.pageItemsType.Advertisement:
                                     section = <RowList className="Advertisement" key={`page-section-${pageItem.pageItemId}`} data={{
                                         payloadType,

@@ -77,7 +77,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             flickityHandler = new Flickity(flickityRef.current.querySelector('.list'), {
                 contain: true,
                 pageDots: false,
-                prevNextButtons: false,
+                prevNextButtons: true,
                 cellAlign: 'right',
                 rightToLeft: true,
                 groupCells: true
@@ -94,20 +94,19 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
     // برای زمانی که دیتایی نیامده و میخواهیم چیزی نشان دهیم
     const getItems = () => {
         let content = [];
-
         if (placeholder || (placeholder === false && items.length === 0)) {
-            let count = 10;
-            if (typeof placeholder === 'number') {
-                count = placeholder;
-            }
-            for (let i = 0; i < count; i++) {
-                content.push(<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${i}`} placeholder={true} />)
-            }
+            return <></>
+            // let count = 10;
+            // if (typeof placeholder === 'number') {
+            //     count = placeholder;
+            // }
+            // for (let i = 0; i < count; i++) {
+            //     content.push(<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${i}`} placeholder={true} />)
+            // }
         } else {
             content = items.map(item => (<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
         }
         return content;
-
     };
 
     if (placeholder) {
@@ -122,12 +121,19 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
 
     return (
         <div ref={ref} className={`row-list col-12 p-0 ${className}`}>
-            <div className='row-title'>
-                <h3>{title}</h3>
-                <Link className='more-link'>
-                    <span>مشاهده همه</span>
-                </Link>
-            </div>
+            {
+                placeholder || (placeholder === false && items.length === 0) ? (
+                    <></>
+                ) : (
+                    <div className='row-title'>
+
+                        <h3>{title}</h3>
+                        <Link className='more-link'>
+                            <span>مشاهده همه</span>
+                        </Link>
+                    </div>
+                )
+            }
             <div className='list-container' ref={flickityRef}>
                 <RealLazyLoad forceVisible={canIRender} placeholder={<RowList placeholder={true} data={{ payloadKey, payloadType }} ItemComponent={ItemComponent} />}
                     componentEntryCallback={() => {
@@ -141,7 +147,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
                     </div>
                 </RealLazyLoad>
             </div>
-        </div>
+        </div >
     )
 
 });

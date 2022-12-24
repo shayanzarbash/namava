@@ -6,7 +6,7 @@ import Guide from '../../utils/Guide';
 import Config from '../../Config';
 
 const fetchSlider = async (dispatch, sliderID) => {
-    dispatch({ type: types.SET_LOADING });
+    dispatch({ type: types.SET_LOADING, });
     let url = (Config.sections.Slider.url).replace('{{SLIDER_ID}}', sliderID);
     let { data: { succeeded, result, errors } } = await Guide.get(url);
 
@@ -29,6 +29,7 @@ const Slider = ({ sliderID }) => {
 
     const { state, dispatch, nextSlide, previousSlide } = useSlider();
 
+    // for fetch data useEffet
     useEffect(() => {
         fetchSlider(dispatch, sliderID);
     }, [dispatch, sliderID]);
