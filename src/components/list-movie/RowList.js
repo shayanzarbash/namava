@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createRef, useEffect, useReducer, } from 'react';
+import React, { createRef, useEffect, useReducer, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './RowList.scss';
 import Flickity from 'flickity';
@@ -55,7 +55,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
     const { items, loading, error, fetchRequest } = state;
 
     useEffect(() => {
-
         if (fetchRequest && (items.length === 0 && loading === false && error === false)) {
             fetchData(payloadType, payloadKey, (result) => {
                 //setItems(result);
@@ -92,6 +91,24 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
         }
     }, [flickityRef, items.length]);
 
+    const [previewState, setPreviewState] = useState({
+        id: undefined,
+        active: false
+    });
+
+    const togglePreview = (id) => {
+        setPreviewState(oldState => {
+            let newState = { ...oldState };
+            if (id !== oldState.id) {
+                newState.id = id;
+                newState.active = true;
+            } else {
+                newState.active = !oldState.active
+            }
+            return newState;
+        });
+    }
+
     // برای زمانی که دیتایی نیامده و میخواهیم چیزی نشان دهیم
     const getItems = () => {
         let content = [];
@@ -105,7 +122,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             //     content.push(<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${i}`} placeholder={true} />)
             // }
         } else {
-            content = items.map(item => (<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
+            content = items.map(item => (<ItemComponent togglePreview={togglePreview} key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
         }
         return content;
     };
@@ -149,7 +166,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
                 </RealLazyLoad>
             </div>
             {(preview === true && canIRender) && (
-                <PreviwItem />
+                <PreviwItem id={previewState['id']} isActive={previewState['active']} />
             )}
         </div >
     )

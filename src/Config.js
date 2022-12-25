@@ -69,5 +69,8 @@ export default {
             pi: 1,
             ps: 20
         },
+        'Preview': {
+            url: 'api/v1.0/medias/{{PEYLOAD_KEY}}/preview',
+        },
     }
 }
