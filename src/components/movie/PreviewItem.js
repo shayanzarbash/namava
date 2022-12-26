@@ -1,7 +1,8 @@
 import './PreviewItem.scss';
 import MovieDetail from './MovieDetail';
 import styled, { keyframes } from 'styled-components';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { fetchData } from '../../utils/Functions';
 
 const fadeIn = keyframes`
       0% {
@@ -30,8 +31,30 @@ const FadeInAnimation = styled.div`
 
 const PreviwItem = ({ id, isActive }) => {
 
+    const [state, setState] = useState({
+        id: undefined,
+        data: null,
+        loading: false
+    });
+
+    useEffect(() => {
+        if (isActive === true && state.id !== id && state.loading === false) {
+            fetchData('Preview', id,
+                (result) => {
+                    setState(({ id: id, data: result, loading: false }));
+                }, () => { },
+                (isLoading) => {
+                    if (isLoading) {
+                        setState(oldState => ({ ...oldState, loading: true }))
+                    }
+                });
+        }
+    })
+
+
     let previewRef = useRef();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const afterAnimationDone = () => {
         let element = previewRef.current;
         if (element) {
@@ -63,7 +86,7 @@ const PreviwItem = ({ id, isActive }) => {
     return (
         <div className={`preview-item ${isActive === true ? 'active' : ''}`} ref={previewRef}>
             <FadeInAnimation className={`fade-in-animation ${isActive === true ? '' : 'clear-animation'}`}>
-                <MovieDetail />
+                <MovieDetail loading={state.loading} data={state.data} />
             </FadeInAnimation>
         </div>
     )
