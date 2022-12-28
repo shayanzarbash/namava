@@ -3,6 +3,7 @@ import MovieDetail from './MovieDetail';
 import styled, { keyframes } from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import { fetchData } from '../../utils/Functions';
+import { getCoords } from '../../utils/Functions';
 
 const fadeIn = keyframes`
       0% {
@@ -37,6 +38,8 @@ const PreviwItem = ({ id, isActive }) => {
         loading: false
     });
 
+    let previewRef = useRef();
+
     useEffect(() => {
         if (isActive === true && state.id !== id && state.loading === false) {
             fetchData('Preview', id,
@@ -49,24 +52,25 @@ const PreviwItem = ({ id, isActive }) => {
                     }
                 });
         }
-    })
-
-
-    let previewRef = useRef();
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const afterAnimationDone = () => {
         let element = previewRef.current;
-        if (element) {
+        if (isActive) {
+            let { top } = getCoords(element);
+            window.scrollBy({ top: (top + element.clientHeight + 0 - window.innerHeight) - window.pageYOffset, left: 0, behavior: "smooth" });
+        }
+        if (element.querySelector('.run-animation')) {
             element.querySelector('.run-animation').removeEventListener('animationend', afterAnimationDone);
             element.querySelector('.fade-in-animation').classList.remove('run-animation');
             element.querySelector('.fade-in-animation').classList.add('clear-animation');
         }
-    }
+    };
 
     useEffect(() => {
         let element = previewRef.current;
-        if (element.querySelector('.fade-in-animation')) {
+        if (element.querySelector('.fade-in-animation') && isActive === true) {
             element.querySelector('.fade-in-animation').classList.add('run-animation');
         }
 

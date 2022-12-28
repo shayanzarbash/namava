@@ -114,13 +114,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
         let content = [];
         if (placeholder || (placeholder === false && items.length === 0)) {
             return <></>
-            // let count = 10;
-            // if (typeof placeholder === 'number') {
-            //     count = placeholder;
-            // }
-            // for (let i = 0; i < count; i++) {
-            //     content.push(<ItemComponent key={`row-item-${payloadType}-${payloadKey}-${i}`} placeholder={true} />)
-            // }
         } else {
             content = items.map(item => (<ItemComponent togglePreview={togglePreview} key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
         }

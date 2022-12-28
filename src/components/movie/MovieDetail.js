@@ -25,7 +25,30 @@ const getDefaultButton = (data) => {
     )
 }
 
+// Functions for get director actor
+const getMediaDetailText = (caption, items, maxLenght, keyType) => {
+    const content = [];
+    if (items == null || items.length > 0) {
+        return;
+    }
+
+    for (let i = 0; i < maxLenght && i < items.length; i++) {
+        content.push(<a href="###" key={`text-${keyType}-${items[i][keyType + "id"]}`}>{items[i][keyType + "name"]}</a>);
+        content.push(<span className='separator' key={`text-separator${keyType}-${items[i][keyType + "id"]}`}>-</span>);
+    }
+
+    content.pop();
+
+    return (
+        <div className='detail-row text-row'>
+            <span>{caption} :</span>
+            {content}
+        </div>
+    );
+}
+
 const MovieDetail = ({ loading, data }) => {
+
     return (
         <div className='movie-detail'>
             <div className='movie-image'>
@@ -67,16 +90,12 @@ const MovieDetail = ({ loading, data }) => {
                             <div className="age-limitation">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20"><path d="M25.307 1H5.085C2.83 1 1.002 2.828 1 5.083v10.332C1 17.67 2.83 19.5 5.085 19.5h20.22c2.255-.001 4.083-1.83 4.083-4.084V5.085c.001-1.083-.43-2.122-1.195-2.888S26.4 1 25.307 1zm-14.55 10.168H8.974v1.785c-.016.494-.422.887-.917.887s-.9-.392-.917-.887V11.17H5.358c-.506 0-.917-.41-.917-.917s.41-.917.917-.917H7.14v-1.78c.016-.494.422-.887.917-.887s.9.392.917.887v1.783h1.782c.506 0 .917.41.917.917s-.41.917-.917.917zm15.15-4.138a2.54 2.54 0 0 1-2.533 2.533H21.82c-.93-.804-2.308-.804-3.238 0h-2.255v5.167c.01.335-.16.65-.45.82s-.646.17-.934 0-.46-.485-.45-.82V5.766c.016-.494.422-.887.917-.887s.9.392.916.887v1.966h2.255a.7.7 0 0 0 .7-.7V5.766c0-.506.41-.917.917-.917s.917.41.917.917v1.266a.7.7 0 0 0 .7.7h1.553a.7.7 0 0 0 .7-.7V5.766c0-.506.41-.917.917-.917s.917.41.917.917z" fill="#99c14d"></path></svg>
                             </div>
-
                             {data.year && (
                                 <div className='detail-item'>{data.year}</div>
                             )}
-
                             {data.mediaDuration && (
                                 <div className='detail-item'>{data.mediaDuration}دقیقه</div>
                             )}
-
-
                             {data.imdb && (
                                 <div className="detail-item has-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="20" fill="#ffffff"
@@ -89,14 +108,14 @@ const MovieDetail = ({ loading, data }) => {
                                     </span>
                                 </div>
                             )}
-                            {data.hit && (
+                            {data.hit > 0 && (
                                 <div className="detail-item has-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"
                                         className="t-icon-0-1-135">
                                         <path className="svg-c1"
                                             d="M13.548 3a4.55 4.55 0 0 0-3.486 1.642C9.2 3.605 7.925 3.003 6.577 3A4.58 4.58 0 0 0 2 7.577c0 6.2 4.852 10.388 8.062 10.388s8.063-4.184 8.063-10.388A4.58 4.58 0 0 0 13.548 3z"></path>
                                     </svg>
-                                    <span>60%</span>
+                                    <span>{data.hit}%</span>
                                 </div>
                             )}
                             {(data.dubsType && data.dubsType !== "None") && (
@@ -123,28 +142,16 @@ const MovieDetail = ({ loading, data }) => {
                                     </span>
                                 </div>
                             )}
-
-
-
-
-
-
-
                         </div>
                     </>
                 )}
-                {/* {data['story'] ? (
+                {/* {data['story'] && (
                     <div className='detail-desciription'>
                         {data['story']}
                     </div>
-                ) : <></>} */}
-
-                <ActionButton item={{}} moreButton={true}
-                    defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
-                <div className='text-row'>
-                    <span>ستارگان : </span>
-                    <span>مدیدری</span>
-                </div>
+                )} */}
+                <ActionButton item={{}} moreButton={true} defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
+                {/* {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')} */}
             </div>
         </div >
     )
