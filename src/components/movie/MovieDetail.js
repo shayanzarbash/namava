@@ -154,7 +154,7 @@ const MovieDetail = ({ loading, data }) => {
                 {/* {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')} */}
             </div>
         </div >
-    )
+    );
 }
 
 export default MovieDetail;

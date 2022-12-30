@@ -72,5 +72,11 @@ export default {
         'Preview': {
             url: 'api/v1.0/medias/{{PEYLOAD_KEY}}/preview',
         },
+        'SinglePageMovie': {
+            url: '/api/v2.0/medias/{{PEYLOAD_KEY}}/single-movie',
+        },
+        'SinglePageSeries': {
+            url: 'api/v2.0/medias/{{PEYLOAD_KEY}}/single-series',
+        },
     }
 }

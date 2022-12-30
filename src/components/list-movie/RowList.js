@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createRef, useEffect, useReducer, useState} from 'react';
+import React, { createRef, useEffect, useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RowList.scss';
 import Flickity from 'flickity';
@@ -115,7 +115,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
         if (placeholder || (placeholder === false && items.length === 0)) {
             return <></>
         } else {
-            content = items.map(item => (<ItemComponent togglePreview={togglePreview} key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
+            content = items.map(item => (<ItemComponent className={((item.id || item.episodId) === previewState.id) && previewState.active ? "active" : ""} togglePreview={togglePreview} key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
         }
         return content;
     };

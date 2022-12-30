@@ -16,7 +16,7 @@ const getCaption = (info) => {
     return caption;
 }
 
-const MovieItem = ({ item, placeholder = false, togglePreview }) => {
+const MovieItem = ({ className, item, placeholder = false, togglePreview }) => {
 
     const [info, setInfo] = useState();
 
@@ -33,12 +33,8 @@ const MovieItem = ({ item, placeholder = false, togglePreview }) => {
         fetchBriefData(item['id'] || item['episodId'], (result) => setInfo(result), () => { });
     }
 
-
-
-
-
     return (
-        <div className='movie-item' onClick={() => {
+        <div className={`movie-item`} onClick={() => {
             if (placeholder !== false) {
                 return false;
             }
@@ -105,9 +101,7 @@ const MovieItem = ({ item, placeholder = false, togglePreview }) => {
                                         زیرنویس
                                     </span>
                                 </div>
-
                             )}
-
                         </div>
                     </div>
                 )}
