@@ -48,6 +48,9 @@ const getMediaDetailText = (caption, items, maxLenght, keyType) => {
 }
 
 const MovieDetail = ({ loading, data }) => {
+    if (data === null) {
+        return true;
+    }
 
     return (
         <div className='movie-detail'>
@@ -150,7 +153,7 @@ const MovieDetail = ({ loading, data }) => {
                         {data['story']}
                     </div>
                 )} */}
-                <ActionButton item={{}} moreButton={true} defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
+                <ActionButton item={data} moreButton={true} defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
                 {/* {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')} */}
             </div>
         </div >

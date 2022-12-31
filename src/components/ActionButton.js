@@ -4,6 +4,7 @@ import momentj from 'moment-jalaali';
 import fa from 'moment/locale/fa';
 import 'moment-timezone';
 import { Link } from 'react-router-dom';
+import { getItemUrl } from '../utils/Functions';
 
 const ActionButton = ({ item, moreButton, defaultButton }) => {
     let buttons = [];
@@ -65,7 +66,7 @@ const ActionButton = ({ item, moreButton, defaultButton }) => {
 
     if (moreButton === true) {
         buttons.push(<div className="more-button has-icon" key={`button-more-${item['id']}`}>
-            <Link to="#">
+            <Link to={getItemUrl(item)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
                     className="Button-icon-0-1-58">
                     <g transform="matrix(-1 0 0 -1 1649.226 -336.319)" className="svg-c1">

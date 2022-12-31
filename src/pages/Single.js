@@ -9,16 +9,15 @@ const Single = () => {
     const { type, id, name } = useParams();
     const [state, setState] = useState({
         id: undefined,
-        data: [],
+        data: null,
         error: false,
         loading: false
     });
 
     useEffect(() => {
-
-        if (state.loading === false && state.error === false && state.data === [] && state.id !== id) {
+        if (state.loading === false && state.error === false && (state.data === null && state.id !== id)) {
             const payloadType = type === "series" ? "SinglePageSeries" : "SinglePageMovie";
-            fetchData(id, payloadType, (result) => {
+            fetchData(payloadType, id, (result) => {
                 setState({ ...state, id: id, data: result, error: false, loading: false });
             }, () => { }, (isLoading) => {
                 if (isLoading) {
