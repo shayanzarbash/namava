@@ -27,6 +27,7 @@ const getDefaultButton = (data) => {
 
 // Functions for get director actor
 const getMediaDetailText = (caption, items, maxLenght, keyType) => {
+    console.log(caption, items, maxLenght, keyType);
     const content = [];
     if (items == null || items.length > 0) {
         return;
@@ -148,15 +149,17 @@ const MovieDetail = ({ loading, data }) => {
                         </div>
                     </>
                 )}
-                {/* {data['story'] && (
+                {data['story'] && (
                     <div className='detail-desciription'>
-                        {data['story']}
+                        <p>
+                            {data['story']}
+                        </p>
                     </div>
-                )} */}
+                )}
                 <ActionButton item={data} moreButton={true} defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
-                {/* {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')} */}
+                {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')}
             </div>
-        </div >
+        </div>
     );
 }
 
