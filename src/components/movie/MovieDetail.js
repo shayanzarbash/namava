@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import styled, { css } from 'styled-components';
 import Config from '../../Config';
 import { getNamavaUrl } from '../../utils/Functions';
 import ActionButton from '../ActionButton';
@@ -47,6 +48,20 @@ const getMediaDetailText = (caption, items, maxLenght, keyType) => {
     );
 }
 
+const MovieDetailContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    ${props => {
+        return props.topMedia === true && css`
+            min-height: 46.875vw;
+            box-shadow: 0 -5px 5px inset rgb(18,18,18);
+            background-size: contain;
+            background-image: linear-gradient(rgba(18, 18, 18, 0) 10vw, rgb(18, 18, 18) 46.875vw), linear-gradient(to left, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0) 50%), 
+            url(${props['imageUrl']});
+        `;
+    }}
+`;
+
 const MovieDetail = ({ loading, data, topMedia }) => {
     let imageUrl;
     if (data && data.coverLandscape) {
@@ -56,8 +71,8 @@ const MovieDetail = ({ loading, data, topMedia }) => {
         return true;
     }
     return (
-        <div className='movie-detail'>
-            {topMedia === true && (
+        <MovieDetailContainer topMedia={topMedia} imageUrl={imageUrl} className={`movie-detail ${topMedia && 'top-media'}`}>
+            {topMedia !== true && (
                 <div className='movie-image'>
                     {(loading !== true && data && data.coverLandscape) && (
                         <img alt="alt" src={getNamavaUrl(data['coverLandscape'])} />
@@ -85,6 +100,10 @@ const MovieDetail = ({ loading, data, topMedia }) => {
                 )}
                 {(loading !== true && data) && (
                     <>
+                        {topMedia && (
+                            <img src={getNamavaUrl(data['logoImageUrl'])} alt={data.caption} className="logo-image" />
+
+                        )}
                         <div className='title'>
                             {data.caption && <a>{data.caption}</a>}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" viewBox="10 0 20 40"
@@ -163,7 +182,7 @@ const MovieDetail = ({ loading, data, topMedia }) => {
                 <ActionButton item={data} moreButton={true} defaultButton={getDefaultButton({ type: Config.itemTypes.Series })} />
                 {(data['casts'] && data['casts'].length > 0) && getMediaDetailText("ُستارگان", data['casts'], 3, 'cast')}
             </div>
-        </div>
+        </MovieDetailContainer>
     );
 }
 

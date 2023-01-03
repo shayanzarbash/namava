@@ -32,11 +32,11 @@ const Single = () => {
     console.log(state, id, type)
 
     return (
-        <div className='container-fluid single'>
+        <div className='single'>
             {
                 state.loading === false && state.data !== null && (
                     <>
-                        <div className='row p-0'>
+                        <div className='p-0'>
                             <MovieDetail data={state.data} topMedia={true} />
                         </div>
                     </>
