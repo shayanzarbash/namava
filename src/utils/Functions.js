@@ -5,7 +5,6 @@ import MovieItem from "../components/MovieItem";
 import ExclusiveDubItem from '../components/ExclusiveDubItem';
 
 export function getItemUrl(item) {
-    console.log("item", item)
     let type = "movie";
     if (item.type !== null && item.type.toLocaleLowerCase() === Config.itemTypes.Series.toLocaleLowerCase()) {
         type = Config.itemTypes.Series.toLocaleLowerCase();

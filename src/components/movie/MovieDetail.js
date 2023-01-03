@@ -27,7 +27,6 @@ const getDefaultButton = (data) => {
 
 // Functions for get director actor
 const getMediaDetailText = (caption, items, maxLenght, keyType) => {
-    console.log(caption, items, maxLenght, keyType);
     const content = [];
     if (items == null || items.length > 0) {
         return;
@@ -48,18 +47,23 @@ const getMediaDetailText = (caption, items, maxLenght, keyType) => {
     );
 }
 
-const MovieDetail = ({ loading, data }) => {
+const MovieDetail = ({ loading, data, topMedia }) => {
+    let imageUrl;
+    if (data && data.coverLandscape) {
+        imageUrl = getNamavaUrl(data.coverLandscape);
+    }
     if (data === null) {
         return true;
     }
-
     return (
         <div className='movie-detail'>
-            <div className='movie-image'>
-                {(loading !== true && data && data.coverLandscape) && (
-                    <img alt="alt" src={getNamavaUrl(data['coverLandscape'])} />
-                )}
-            </div>
+            {topMedia === true && (
+                <div className='movie-image'>
+                    {(loading !== true && data && data.coverLandscape) && (
+                        <img alt="alt" src={getNamavaUrl(data['coverLandscape'])} />
+                    )}
+                </div>
+            )}
             <div className='movie-detail-box'>
                 {loading === true && (
                     <svg className="loading-svg" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 44 44" fill="none">

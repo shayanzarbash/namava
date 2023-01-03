@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../style.scss';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../utils/Functions';
+import MovieDetail from '../components/movie/MovieDetail';
 
 // in this page : show data from api and routes page
 const Single = () => {
@@ -28,13 +29,20 @@ const Single = () => {
         }
     }, [state, id, type]);
 
-    console.log(type, id, name, state);
+    console.log(state, id, type)
 
-    console.log("sisngle")
     return (
-        <div className="namess">bggggggggggggggggggggggg
-            thththh
-            bhfhfth
+        <div className='container-fluid single'>
+            {
+                state.loading === false && state.data !== null && (
+                    <>
+                        <div className='row p-0'>
+                            <MovieDetail data={state.data} topMedia={true} />
+                        </div>
+                    </>
+                )
+            }
+
         </div>
     )
 }
