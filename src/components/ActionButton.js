@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { getItemUrl } from '../utils/Functions';
 
 const ActionButton = ({ item, moreButton, defaultButton }) => {
-    console.log("item", item);
     let buttons = [];
     if (item['publishInFuture'] === true) {
         momentj.locale("fa", fa);

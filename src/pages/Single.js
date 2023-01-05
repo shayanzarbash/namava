@@ -3,6 +3,7 @@ import '../style.scss';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../utils/Functions';
 import MovieDetail from '../components/movie/MovieDetail';
+import TrailerLists from '../components/list-movie/TrailerList';
 
 // in this page : show data from api and routes page
 const Single = () => {
@@ -29,8 +30,6 @@ const Single = () => {
         }
     }, [state, id, type]);
 
-    console.log(state, id, type)
-
     return (
         <div className='single'>
             {
@@ -39,6 +38,15 @@ const Single = () => {
                         <div className='p-0'>
                             <MovieDetail data={state.data} topMedia={true} />
                         </div>
+                        {
+                            state.data.slideImageList && (
+                                <div className='row px-2'>
+                                    <div className='col-12'>
+                                        <TrailerLists id={id} images={state.data.slideImageList} />
+                                    </div>
+                                </div>
+                            )
+                        }
                     </>
                 )
             }
