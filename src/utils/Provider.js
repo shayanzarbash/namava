@@ -1,7 +1,6 @@
 import { MenusProvider } from "../context/MenusContext";
 import { SliderProvider } from "../context/SliderContext";
 
-
 const Provider = ({ children }) => {
     return (
         <MenusProvider>

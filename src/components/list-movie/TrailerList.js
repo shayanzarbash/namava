@@ -3,6 +3,7 @@ import TrailerItem from '../TrailerItem';
 import RowList from './RowList';
 import './TrailerList.scss';
 
+
 const TrailerLists = ({ id, images }) => {
 
     let items = [];
@@ -14,12 +15,15 @@ const TrailerLists = ({ id, images }) => {
     });
 
 
+
+
+
     return (
         <div className='trailer-list'>
             <h3 className='trailer-list title'>تصاویر</h3>
             <div className='row'>
                 <div className='col-12 p-0'>
-                    <RowList ItemComponent={TrailerItem} data={{ payloadType: "TrailerList", payloadKey: id, items: items }} placeholder={false} />
+                        <RowList ItemComponent={TrailerItem} data={{ payloadType: "TrailerList", payloadKey: id, items: items }} placeholder={false} />
                 </div>
             </div>
         </div>

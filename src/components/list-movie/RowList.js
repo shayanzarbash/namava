@@ -107,7 +107,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             return newState;
         });
     }
-
     // برای زمانی که دیتایی نیامده و میخواهیم چیزی نشان دهیم
     const getItems = () => {
         let content = [];
@@ -126,23 +125,21 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             </div>
         )
     }
-
     let canIRender = items.length > 0 && error === false && loading === false;
 
     return (
         <div ref={ref} className={`row-list col-12 p-0 ${className}`}>
             {
-                placeholder || (placeholder === false && items.length === 0) ? (
-                    <></>
-                ) : (
-                    <div className='row-title'>
-
-                        <h3>{title}</h3>
-                        <Link className='more-link'>
-                            <span>مشاهده همه</span>
-                        </Link>
-                    </div>
-                )
+                placeholder || (placeholder === false && items.length === 0)
+                    ? (<></>)
+                    : (
+                        <div className='row-title'>
+                            <h3>{title}</h3>
+                            <Link className='more-link'>
+                                <span>مشاهده همه</span>
+                            </Link>
+                        </div>
+                    )
             }
             <div className='list-container' ref={flickityRef}>
                 <RealLazyLoad forceVisible={canIRender} placeholder={<RowList placeholder={true} data={{ payloadKey, payloadType }} ItemComponent={ItemComponent} />}
@@ -162,7 +159,6 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
             )}
         </div >
     )
-
 });
 
 export default RowList;
