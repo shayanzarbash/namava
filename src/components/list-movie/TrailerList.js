@@ -15,15 +15,12 @@ const TrailerLists = ({ id, images }) => {
     });
 
 
-
-
-
     return (
         <div className='trailer-list'>
             <h3 className='trailer-list title'>تصاویر</h3>
-            <div className='row'>
-                <div className='col-12 p-0'>
-                        <RowList ItemComponent={TrailerItem} data={{ payloadType: "TrailerList", payloadKey: id, items: items }} placeholder={false} />
+            <div className=''>
+                <div className=''>
+                    <RowList ItemComponent={TrailerItem} data={{ payloadType: "TrailerList", payloadKey: id, items: items }} placeholder={false} />
                 </div>
             </div>
         </div>

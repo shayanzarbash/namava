@@ -11,7 +11,7 @@
         align-items: center;
         justify-content: center;
         .slider-arrow-left {
-            transform: rotate(180deg);
+            transform: rotate(-180deg);
         }
         .slider-arrow {
             display: flex;

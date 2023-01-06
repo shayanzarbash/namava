@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import '../style.scss';
 import { useParams } from 'react-router-dom';
-import { fetchData } from '../utils/Functions';
+import { fetchData, getMediaDetailText } from '../utils/Functions';
 import MovieDetail from '../components/movie/MovieDetail';
 import TrailerLists from '../components/list-movie/TrailerList';
+import Config from '../Config';
+import PersonItem from '../components/PersonItem';
 
 // in this page : show data from api and routes page
 const Single = () => {
@@ -30,6 +32,8 @@ const Single = () => {
         }
     }, [state, id, type]);
 
+    console.log(state.data);
+
     return (
         <div className='single'>
             {
@@ -40,17 +44,50 @@ const Single = () => {
                         </div>
                         {
                             state.data.slideImageList && (
-                                <div className='row px-2'>
-                                    <div className='col-12'>
+                                <div className=''>
+                                    <div className=''>
                                         <TrailerLists id={id} images={state.data.slideImageList} />
                                     </div>
                                 </div>
                             )
                         }
+                        <div className="row single-row">
+                            <div className="col-12 px-5">
+                                {state['data']['movieLatinName'] && (
+                                    <div className="media-detail-latin-name">
+                                        {state['data']['movieLatinName']}
+                                    </div>
+                                )}
+                                {state['data']['caption'] && (
+                                    <div className="media-detail-title">
+                                        درباره {(() => {
+                                            return state['data']['type'].toLowerCase() === Config.itemTypes.Series ? 'سریال ' : 'فیلم '
+                                        })()}
+                                        {state['data']['caption']}
+                                    </div>
+                                )}
+                                {state['data']['about'] && (
+                                    <div className="media-detail-description" dangerouslySetInnerHTML={{ __html: state['data']['about'] }}></div>
+                                )}
+                                {state['data']['categories'] && (
+                                    getMediaDetailText('دسته بندی', state['data']['categories'], 10, 'category', ' ، ')
+                                )}
+                                {state['data']['voiceList'] && (
+                                    getMediaDetailText('صدا', state['data']['voiceList'], 10, 'language', ' ، ')
+                                )}
+                                {state['data']['subtitleList'] && (
+                                    getMediaDetailText('زیرنویس', state['data']['subtitleList'], 10, 'language', ' ، ')
+                                )}
+                            </div>
+                        </div>
+                        {/* <div className=''>
+                            {(state.data.casts) && (
+                                <PersonItem item={state['data']['casts']} />
+                            )}
+                        </div> */}
                     </>
                 )
             }
-
         </div>
     )
 }

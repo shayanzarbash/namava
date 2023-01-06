@@ -4,6 +4,7 @@ import Config from '../../Config';
 import { getNamavaUrl } from '../../utils/Functions';
 import ActionButton from '../ActionButton';
 import './MovieDetail.scss';
+import { getMediaDetailText } from '../../utils/Functions';
 
 const getDefaultButton = (data) => {
     return data.type !== Config.itemTypes.Series ? (
@@ -26,27 +27,7 @@ const getDefaultButton = (data) => {
     )
 }
 
-// Functions for get director actor
-const getMediaDetailText = (caption, items, maxLenght, keyType) => {
-    const content = [];
-    if (items == null || items.length > 0) {
-        return;
-    }
 
-    for (let i = 0; i < maxLenght && i < items.length; i++) {
-        content.push(<a href="###" key={`text-${keyType}-${items[i][keyType + "id"]}`}>{items[i][keyType + "name"]}</a>);
-        content.push(<span className='separator' key={`text-separator${keyType}-${items[i][keyType + "id"]}`}>-</span>);
-    }
-
-    content.pop();
-
-    return (
-        <div className='detail-row text-row'>
-            <span>{caption} :</span>
-            {content}
-        </div>
-    );
-}
 
 const MovieDetailContainer = styled.div`
     width: 100%;
