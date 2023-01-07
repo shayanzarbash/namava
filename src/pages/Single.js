@@ -51,7 +51,7 @@ const Single = () => {
                                 </div>
                             )
                         }
-                        <div className="row single-row">
+                        <div className="single-row">
                             <div className="col-12 px-5">
                                 {state['data']['movieLatinName'] && (
                                     <div className="media-detail-latin-name">
@@ -61,7 +61,7 @@ const Single = () => {
                                 {state['data']['caption'] && (
                                     <div className="media-detail-title">
                                         درباره {(() => {
-                                            return state['data']['type'].toLowerCase() === Config.itemTypes.Series ? 'سریال ' : 'فیلم '
+                                            return state['data']['type'] === Config.itemTypes.Series ? 'سریال ' : 'فیلم '
                                         })()}
                                         {state['data']['caption']}
                                     </div>
@@ -80,11 +80,11 @@ const Single = () => {
                                 )}
                             </div>
                         </div>
-                        {/* <div className=''>
-                            {(state.data.casts) && (
-                                <PersonItem item={state['data']['casts']} />
+                        <div className=''>
+                            {(state['data']['casts'] && state['data']['casts'].length > 0) && (
+                                <PersonItem item={state['data']['casts'][0]} />
                             )}
-                        </div> */}
+                        </div>
                     </>
                 )
             }

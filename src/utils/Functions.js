@@ -6,8 +6,8 @@ import ExclusiveDubItem from '../components/ExclusiveDubItem';
 
 export function getItemUrl(item) {
     let type = "movie";
-    if (item.type !== null && item.type.toLocaleLowerCase() === Config.itemTypes.Series.toLocaleLowerCase()) {
-        type = Config.itemTypes.Series.toLocaleLowerCase();
+    if (item.type !== null && item.type === Config.itemTypes.Series) {
+        type = Config.itemTypes.Series;
     }
     let title = item.caption || item.title;
 
