@@ -10,7 +10,7 @@ const App = () => {
     <Provider>
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route exact path='/' element={<Home />} />
           <Route path='/:type/:id-:name' element={<Single />} />
         </Routes>
       </Router>

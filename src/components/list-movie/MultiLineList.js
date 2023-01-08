@@ -1,11 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createRef, useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, } from 'react';
 import { Link } from 'react-router-dom';
 import './RowList.scss';
-import Flickity from 'flickity';
 import { fetchData } from '../../utils/Functions';
-import { RealLazyLoad } from 'real-react-lazyload';
-import PreviwItem from '../movie/PreviewItem';
+import SingleRowList from './SingleRowList';
 
 
 const types = {
@@ -34,7 +32,7 @@ let multiLineReducer = (state, action) => {
             break;
 
         default:
-            throw Error("error RowList");
+            throw Error("error multiLineReducer");
     }
 
     return state;
@@ -42,7 +40,7 @@ let multiLineReducer = (state, action) => {
 
 
 
-const MultiLineList = React.forwardRef(({ className, data: { payloadType, payloadKey, title, items: defaultItems, key }, ItemComponent, placeholder = false, preview = false }, ref) => {
+const MultiLineList = React.forwardRef(({ className, data: { payloadType, payloadKey, title, items: defaultItems, key = "id", page, slug, maxItems, options = {}, perRow = 7 }, ItemComponent, placeholder = false, preview = false }, ref) => {
     const initialState = {
         items: defaultItems || [],
         loading: false,
@@ -69,94 +67,50 @@ const MultiLineList = React.forwardRef(({ className, data: { payloadType, payloa
         }
     }, [payloadType, payloadKey, placeholder, fetchRequest, dispatch, items.length, loading, error]);
 
-    useEffect(() => {
-        let flickityHandler = undefined;
-        if (flickityRef.current && flickityRef.current.querySelector('.list')) {
-            flickityHandler = new Flickity(flickityRef.current.querySelector('.list'), {
-                contain: true,
-                pageDots: false,
-                prevNextButtons: true,
-                cellAlign: 'right',
-                rightToLeft: true,
-                groupCells: true
-            });
-        }
-        // موقع نابودی درخواست (باید نابود شوند )
-        return () => {
-            if (flickityHandler) {
-                flickityHandler.remove();
-            }
-        }
-    }, [flickityRef, items.length]);
-
-    const [previewState, setPreviewState] = useState({
-        id: undefined,
-        active: false
-    });
-
-    const togglePreview = (id) => {
-        setPreviewState(oldState => {
-            let newState = { ...oldState };
-            if (id !== oldState.id) {
-                newState.id = id;
-                newState.active = true;
-            } else {
-                newState.active = !oldState.active
-            }
-            return newState;
-        });
-    }
     // برای زمانی که دیتایی نیامده و میخواهیم چیزی نشان دهیم
-    const getItems = () => {
-        let content = [];
-        if (placeholder || (placeholder === false && items.length === 0)) {
-            return <></>
-        } else {
-            content = items.map(item => (<ItemComponent className={((item.id || item.episodId) === previewState.id) && previewState.active ? "active" : ""} togglePreview={togglePreview} key={`row-item-${payloadType}-${payloadKey}-${item['id'] || item['episodId']}`} item={item} />))
+    const getRows = () => {
+        let rows = [];
+        let row = 0;
+        let rowItems = [];
+        let max = items.length;
+        let z = 0;
+        if (maxItems != null && maxItems < max) {
+            max = maxItems;
         }
-        return content;
-    };
-
-    if (placeholder) {
-        return (
-            <div ref={ref} className="list">
-                {getItems()}
-            </div>
-        )
+        for (let i = 0; i < max; i++) {
+            rowItems[z++] = items[i];
+            if (z === 7 || i + 1 === max) {
+                rows.push(<SingleRowList key={`single-row-${payloadType}-${payloadKey}-${key}-${row}`} data={{
+                    payloadType,
+                    payloadKey,
+                    items: rowItems,
+                    key,
+                    slug
+                }} ItemComponent={ItemComponent} placeholder={false} />)
+                z = 0;
+                rowItems = [];
+            }
+        }
+        return rows;
     }
-    let canIRender = items.length > 0 && error === false && loading === false;
+
+
+    let canIRender = items.length > 0;
 
     return (
         <div ref={ref} className={`row-list col-12 p-0 ${className}`}>
-            {
-                placeholder || (placeholder === false && items.length === 0)
-                    ? (<></>)
-                    : (
-                        <div className='row-title'>
-                            <h3>{title}</h3>
-                            <Link className='more-link'>
-                                <span>مشاهده همه</span>
-                            </Link>
-                        </div>
-                    )
-            }
-            <div className='list-container' ref={flickityRef}>
-                <RealLazyLoad forceVisible={canIRender} placeholder={<MultiLineList placeholder={true} data={{ payloadKey, payloadType }} ItemComponent={ItemComponent} />}
-                    componentEntryCallback={() => {
-                        if (fetchRequest === false && loading === false) {
-                            dispatch({ type: types.SET_FETCH_REQUEST });
-                        }
-                        return false;
-                    }}>
-                    <div className='list'>
-                        {(items.length > 0 && loading === false) && (getItems())}
-                    </div>
-                </RealLazyLoad>
-            </div>
-            {(preview === true && canIRender) && (
-                <PreviwItem id={previewState['id']} isActive={previewState['active']} />
+            {title && (
+                <div className='row-title'>
+                    <h3>{title}</h3>
+                    <Link className='more-link'>
+                        <span>مشاهده همه</span>
+                    </Link>
+                </div>
             )}
-        </div >
+            {canIRender && (
+                getRows()
+            )}
+        </div>
     )
 });
 

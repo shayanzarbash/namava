@@ -6,6 +6,7 @@ import MovieDetail from '../components/movie/MovieDetail';
 import TrailerLists from '../components/list-movie/TrailerList';
 import Config from '../Config';
 import PersonItem from '../components/PersonItem';
+import MultiLineList from '../components/list-movie/MultiLineList';
 
 // in this page : show data from api and routes page
 const Single = () => {
@@ -82,7 +83,13 @@ const Single = () => {
                         </div>
                         <div className=''>
                             {(state['data']['casts'] && state['data']['casts'].length > 0) && (
-                                <PersonItem item={state['data']['casts'][0]} />
+                                <MultiLineList data={{
+                                    payloadType: 'PersonList',
+                                    payloadKey: id,
+                                    items: state.data.casts,
+                                    key: "castId",
+
+                                }} preview={false} ItemComponent={PersonItem} placeholder={false} />
                             )}
                         </div>
                     </>

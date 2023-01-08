@@ -27,21 +27,23 @@ const PersonItem = ({ item, placeholder = false }) => {
     } else {
         imageUrl = Config.defaultImage;
     }
-    return <div className="person-item">
-        <Link to={placeholder === false ? getItemUrl(item, "Person") : "#"}>
-            <div className="person-image">
-                {placeholder === false && (
-                    <img src={imageUrl} alt={item['castName']} />
-                )}
-            </div>
-            <div className="person-title">
-                {item['castName']}
-            </div>
-            <div className="person-role">
-                {getRoleName(item['castRole'])}
-            </div>
-        </Link>
-    </div>
-}
+    return (
+        <div className="person-item">
+            <Link to={placeholder === false ? getItemUrl(item, "Person") : "#"}>
+                <div className="person-image">
+                    {placeholder === false && (
+                        <img src={imageUrl} alt={item['castName']} />
+                    )}
+                </div>
+                <div className="person-title">
+                    {item['castName']}
+                </div>
+                <div className="person-role">
+                    {getRoleName(item['castRole'])}
+                </div>
+            </Link>
+        </div>
+    );
+};
 
 export default PersonItem;

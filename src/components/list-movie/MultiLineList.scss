@@ -1,28 +1,19 @@
-.PostGroup .flickity-rtl {
-    .flickity-prev-next-button.next {
-        transform: translateY(-75px);
-    }
-    .flickity-prev-next-button.previous {
-        transform: translateY(-75px);
-    }
-}
-.row-list {
+.multi-list {
     direction: rtl;
-
-    .row-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .multi-title {
         width: 100%;
         display: flex;
         box-sizing: border-box;
         margin-bottom: 16px;
-        padding: 0 15px;
+        padding: 0 43px;
         align-items: center;
-        margin-top: 40px;
-
         h3 {
-            font-size: 18px;
+            font: 18px Shabnam;
             color: white;
         }
-
         a {
             font: 12px Shabnam;
             color: white;
@@ -32,11 +23,9 @@
             text-decoration: none;
             opacity: 0;
             transition: opacity 0.4s;
-
             &:hover {
                 opacity: 1;
             }
-
             svg {
                 fill: white;
                 width: 20px;
@@ -45,17 +34,14 @@
             }
         }
     }
-
-    .list-container {
+    & > .list-container {
         width: 100%;
         overflow: hidden;
-        padding: 0 0 5px 5px;
-
-        & > .list {
+        padding: 0 43px 5px 43px;
+        & > .row {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: stretch;
-
             .flickity-viewport {
                 overflow: inherit;
             }
