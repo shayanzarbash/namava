@@ -1,4 +1,4 @@
-import { Route, Switch, } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import './style.scss';
 import Provider from './utils/Provider';
@@ -7,15 +7,14 @@ import Single from './pages/Single';
 
 const App = () => {
   return (
+
     <Provider>
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route path='/:type/:id-:name'>
-          <Single />
-        </Route>
-      </Switch>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path={'/:type/:id([0-9]+):name'} exact={true} component={Single} />
+        </Switch>
+      </BrowserRouter>
     </Provider>
   );
 }

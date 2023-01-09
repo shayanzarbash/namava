@@ -76,7 +76,7 @@ const ActionButton = ({ item, moreButton, defaultButton }) => {
                         <rect width="3.14" height="3.14" rx="1.57" x="1632.561" y="-346.124"></rect>
                     </g>
                 </svg>
-                <span>توضیحات بیشتر</span>
+                <span>توضیحات </span>
             </Link>
         </div>)
     }
