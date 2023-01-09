@@ -7,7 +7,7 @@ import './AdsItem.scss';
 const AdsItem = ({ item, placeholder = false }) => {
     return (
         <div className='ads-item'>
-            <Link>
+            <Link to="#">
                 {placeholder === false && (
                     <ImageRealLazyLoad src={getNamavaUrl(item['imageUrl'])} alt={item.caption} />
                 )}

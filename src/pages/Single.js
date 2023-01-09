@@ -11,13 +11,15 @@ import MultiLineList from '../components/list-movie/MultiLineList';
 // in this page : show data from api and routes page
 const Single = () => {
 
-    const { type, id, name } = useParams();
+    const { type, id } = useParams();
     const [state, setState] = useState({
         id: undefined,
         data: null,
         error: false,
         loading: false
     });
+
+    console.log(useParams());
 
     useEffect(() => {
         if (state.loading === false && state.error === false && (state.data === null && state.id !== id)) {

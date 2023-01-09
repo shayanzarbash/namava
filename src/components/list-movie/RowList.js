@@ -135,7 +135,7 @@ const RowList = React.forwardRef(({ className, data: { payloadType, payloadKey, 
                     : (
                         <div className='row-title'>
                             <h3>{title}</h3>
-                            <Link className='more-link'>
+                            <Link className='more-link' to="#">
                                 <span>مشاهده همه</span>
                             </Link>
                         </div>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
+import { Route, Switch, } from 'react-router-dom';
 import Home from './pages/Home';
 import './style.scss';
 import Provider from './utils/Provider';
@@ -8,12 +8,14 @@ import Single from './pages/Single';
 const App = () => {
   return (
     <Provider>
-      <Router>
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/:type/:id-:name' element={<Single />} />
-        </Routes>
-      </Router>
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route path='/:type/:id-:name'>
+          <Single />
+        </Route>
+      </Switch>
     </Provider>
   );
 }
