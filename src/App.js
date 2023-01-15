@@ -7,7 +7,6 @@ import Single from './pages/Single';
 
 const App = () => {
   return (
-
     <Provider>
       <BrowserRouter>
         <Switch>
