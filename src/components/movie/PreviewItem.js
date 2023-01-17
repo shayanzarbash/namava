@@ -30,7 +30,7 @@ const FadeInAnimation = styled.div`
         }
     `;
 
-const PreviwItem = ({ id, isActive }) => {
+const PreviewItem = ({ id, isActive }) => {
 
     const [state, setState] = useState({
         id: undefined,
@@ -96,4 +96,4 @@ const PreviwItem = ({ id, isActive }) => {
     )
 }
 
-export default PreviwItem;
+export default PreviewItem;

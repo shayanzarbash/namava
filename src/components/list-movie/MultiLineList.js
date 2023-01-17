@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useReducer, } from 'react';
+import { useEffect, useReducer, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import './RowList.scss';
 import { fetchData } from '../../utils/Functions';
@@ -40,7 +39,7 @@ let multiLineReducer = (state, action) => {
 
 
 
-const MultiLineList = React.forwardRef(({ className, data: { payloadType, payloadKey, title, items: defaultItems, key = "id", page, slug, maxItems, options = {}, perRow = 7 }, ItemComponent, placeholder = false, preview = false }, ref) => {
+const MultiLineList = forwardRef(({ className, data: { payloadType, payloadKey, title, items: defaultItems, key = "id", page, slug, maxItems, options = {}, perRow = 7 }, ItemComponent, placeholder = false, preview = false }, ref) => {
     const initialState = {
         items: defaultItems || [],
         loading: false,
@@ -63,9 +62,9 @@ const MultiLineList = React.forwardRef(({ className, data: { payloadType, payloa
                 if (isLoading) {
                     dispatch({ type: types.SET_LOADING, loading: isLoading });
                 }
-            });
+            }, options);
         }
-    }, [payloadType, payloadKey, placeholder, fetchRequest, dispatch, items.length, loading, error]);
+    }, [payloadType, payloadKey, placeholder, fetchRequest, dispatch, items.length, loading, error, options]);
 
     // برای زمانی که دیتایی نیامده و میخواهیم چیزی نشان دهیم
     const getRows = () => {

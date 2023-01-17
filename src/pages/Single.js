@@ -7,6 +7,8 @@ import TrailerLists from '../components/list-movie/TrailerList';
 import Config from '../Config';
 import PersonItem from '../components/PersonItem';
 import MultiLineList from '../components/list-movie/MultiLineList';
+import MovieItem from '../components/MovieItem';
+import Comments from '../components/movie/Comments';
 
 // in this page : show data from api and routes page
 const Single = () => {
@@ -94,6 +96,15 @@ const Single = () => {
                                 }} preview={false} ItemComponent={PersonItem} placeholder={false} />
                             )}
                         </div>
+                        {/* <MultiLineList data={{
+                            payloadType: "SinglePageRelated",
+                            payloadKey: id,
+                            options: {
+                                categoryId: (state['data']['categories'] && state['data']['categories'].length > 0) ? state['data']['categories'][0]['categoryId'] : undefined,
+                            },
+                            maxItems: 14
+                        }} preview={true} placeholder={false} ItemComponent={MovieItem} /> */}
+                        <Comments mediaId={id} />
                     </>
                 )
             }

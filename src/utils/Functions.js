@@ -44,7 +44,7 @@ export function getNamavaUrl(url) {
     return `https://www.namava.ir${url}`;
 }
 
-export const fetchData = async (payloadType, payloadKey, onSuccess, onError, setLoading,) => {
+export const fetchData = async (payloadType, payloadKey, onSuccess, onError, setLoading, options = {}) => {
     if (setLoading) {
         setLoading(true);
     }
@@ -57,11 +57,17 @@ export const fetchData = async (payloadType, payloadKey, onSuccess, onError, set
         return;
     }
     let url = section.url.replace('{{PEYLOAD_KEY}}', payloadKey);
-    let { data: { succeeded, result, error } } = await Guide.get(url, {
-        params: {
-            pi: Config.sections[payloadType].pi || undefined,
-            ps: Config.sections[payloadType].ps || undefined,
+    let params = {};
+    for (let key in section) {
+        if (key !== 'url') {
+            params[key] = options[key];
+            if (params[key] === undefined && section[key] !== undefined) {
+                params[key] = section[key];
+            }
         }
+    }
+    let { data: { succeeded, result, error } } = await Guide.get(url, {
+        params: params
     });
     if (setLoading) {
         setLoading(false);
