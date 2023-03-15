@@ -1,0 +1,62 @@
+/* Custom Dark Mode Toggle Element */
+.toggle-theme-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    top: 30px;
+    left: 42px;
+    z-index: 10;
+}
+
+.toggle-theme-wrapper span {
+    font-size: 28px;
+}
+
+.toggle-theme {
+    position: relative;
+    display: inline-block;
+    height: 24px;
+    width: 50px;
+}
+
+.toggle-theme input {
+    display: none;
+}
+
+input:checked + .sliderDark:before {
+    transform: translateX(26px);
+}
+
+input:checked + .sliderDark {
+    background: linear-gradient(to bottom, rgba(25, 147, 255, 1), rgba(0, 95, 180, 1));
+}
+.sliderDark {
+    background-color: #ccc;
+    position: absolute;
+    cursor: pointer;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: 0.2s;
+}
+
+.sliderDark:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 16px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 16px;
+}
+.sliderDark.round {
+    border-radius: 34px;
+}
+
+.sliderDark.round:before {
+    border-radius: 50%;
+}

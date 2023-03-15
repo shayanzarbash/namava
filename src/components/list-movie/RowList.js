@@ -78,11 +78,12 @@ const RowList = forwardRef(({ className, data: { payloadType, payloadKey, title,
         if (flickityRef.current && flickityRef.current.querySelector('.row')) {
             flickityHandler = new Flickity(flickityRef.current.querySelector('.row'), {
                 contain: true,
-                pageDots: false,
+                pageDots: true,
                 prevNextButtons: false,
                 cellAlign: 'right',
                 rightToLeft: true,
-                groupCells: true
+                groupCells: true,
+                freeScroll: true
             });
         }
         return () => {

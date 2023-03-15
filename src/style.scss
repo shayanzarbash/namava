@@ -23,14 +23,23 @@ span {
   font-family: iran;
   direction: rtl;
 }
-
-body {
-  background-color: #121212;
-  font-family: iran;
+/* 1 */
+:root {
+  --font-color: #121212;
+  --background-color: #fff;
+  --link-color: cornflowerblue;
 }
 
-.namess {
-  color: #fff;
+/* 2 */
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #121212;
+  --link-color: lightblue;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+  font-family: iran;
 }
 
 .single {

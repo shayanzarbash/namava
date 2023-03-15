@@ -43,10 +43,8 @@ const Home = () => {
         fetchMenus(dispatch);
     }, [dispatch]);
 
-    return (
-        <div>
-            <div className="">
-                <div className="">
+    return (              
+                <>
                     {(menus.loading === false && menus.succeeded === true)
                         && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
                             let section = undefined;
@@ -86,9 +84,7 @@ const Home = () => {
                             }
                             return section;
                         })}
-                </div>
-            </div>
-        </div>
+                </>         
     )
 };
 

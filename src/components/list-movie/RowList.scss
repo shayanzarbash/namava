@@ -14,13 +14,12 @@
         display: flex;
         box-sizing: border-box;
         margin-bottom: 16px;
-        padding: 0 15px;
+        padding: 0 20px;
         align-items: center;
         margin-top: 40px;
 
         h3 {
             font-size: 18px;
-            color: white;
         }
 
         a {
@@ -49,7 +48,7 @@
     .list-container {
         width: 100%;
         overflow: hidden;
-        padding: 0 0 5px 5px;
+        padding: 0 24px 5px 5px;
 
         & > .list {
             display: flex;

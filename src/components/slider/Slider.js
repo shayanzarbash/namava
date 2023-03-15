@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { types, useSlider } from '../../context/SliderContext';
 import Guide from '../../utils/Guide';
 import Config from '../../Config';
+import DarkMode from '../DarkMode';
 
 const fetchSlider = async (dispatch, sliderID) => {
     dispatch({ type: types.SET_LOADING, });
@@ -47,6 +48,7 @@ const Slider = ({ sliderID }) => {
 
     return (
         <div className='col-12 p-0 slider'>
+            <DarkMode />
             {(state.succeeded && state.items.length > 0) && state.items.map((sliderItem, index) => (
                 <SliderItem key={sliderItem['id']}
                     slider={{ ...sliderItem, title: sliderItem.caption }}
@@ -63,7 +65,7 @@ const Slider = ({ sliderID }) => {
                             opacity=".404"></path>
                     </svg>
                 </div>
-                <div className="slider-arrow" onClick={nextSlide}>
+                <div className="slider-arrow slider-arrow-right" onClick={nextSlide}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="#fff"
                         className="slider-arrow--chevron">
                         <path d="M0 0h25c13.807 0 25 11.193 25 25S38.807 50 25 50H0V0z" opacity=".3"></path>
