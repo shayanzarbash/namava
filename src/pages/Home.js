@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Slider from "../components/slider/Slider";
 import RowList from "../components/list-movie/RowList";
@@ -9,6 +10,7 @@ import Config from "../Config";
 import { getItemComponent } from "../utils/Functions";
 import AdsItem from "../components/AdsItem";
 import BannerItem from "../components/BannerItem";
+import GoToTop from "../components/GoToTop";
 
 //تابعی برای درخواست میباست به صورت ناهمزمان باشد تا در خواست منتظر بماند تا بگیرد
 let fetchMenus = async (dispatch) => {
@@ -43,48 +45,49 @@ const Home = () => {
         fetchMenus(dispatch);
     }, [dispatch]);
 
-    return (              
-                <>
-                    {(menus.loading === false && menus.succeeded === true)
-                        && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
-                            let section = undefined;
-                            let preview = false;
-                            // eslint-disable-next-line default-case
-                            switch (payloadType) {
-                                case Config.pageItemsType.Slider:
-                                    section = <Slider key={`page-section-${pageItem.pageItemId}`} sliderID={payloadKey} />;
-                                    break;
-                                case Config.pageItemsType.Latest:
-                                case Config.pageItemsType.LatestEpisods:
-                                case Config.pageItemsType.CategoryGroup:
-                                case Config.pageItemsType.ExclusiveDubs:
-                                case Config.pageItemsType.PostGroup:
-                                    preview = true;
-                                    let itemComponent = getItemComponent(payloadType);
-                                    section = <RowList preview={preview} className="PostGroup" key={`page-section-${pageItem.pageItemId}`} data={{
-                                        payloadType,
-                                        payloadKey,
-                                        title: pageItem.caption
-                                    }} ItemComponent={itemComponent} />;
-                                    break;
-                                case Config.pageItemsType.Advertisement:
-                                    section = <RowList className="Advertisement" key={`page-section-${pageItem.pageItemId}`} data={{
-                                        payloadType,
-                                        payloadKey,
-                                    }} ItemComponent={AdsItem} />
-                                    break;
-                                case Config.pageItemsType.BannerGroup:
-                                    section = <RowList className="Banner" key={`page-section-${pageItem.pageItemId}`} data={{
-                                        payloadType,
-                                        payloadKey,
-                                    }} ItemComponent={BannerItem} />
-                                    break;
-                                default:
-                                    section = undefined;
-                            }
-                            return section;
-                        })}
-                </>         
+    return (
+        <>
+            {(menus.loading === false && menus.succeeded === true)
+                && menus.home.pageItems.map(({ payloadType, payloadKey, ...pageItem }) => {
+                    let section = undefined;
+                    let preview = false;
+                    // eslint-disable-next-line default-case
+                    switch (payloadType) {
+                        case Config.pageItemsType.Slider:
+                            section = <Slider key={`page-section-${pageItem.pageItemId}`} sliderID={payloadKey} />;
+                            break;
+                        case Config.pageItemsType.Latest:
+                        case Config.pageItemsType.LatestEpisods:
+                        case Config.pageItemsType.CategoryGroup:
+                        case Config.pageItemsType.ExclusiveDubs:
+                        case Config.pageItemsType.PostGroup:
+                            preview = true;
+                            let itemComponent = getItemComponent(payloadType);
+                            section = <RowList preview={preview} className="PostGroup" key={`page-section-${pageItem.pageItemId}`} data={{
+                                payloadType,
+                                payloadKey,
+                                title: pageItem.caption
+                            }} ItemComponent={itemComponent} />;
+                            break;
+                        case Config.pageItemsType.Advertisement:
+                            section = <RowList className="Advertisement" key={`page-section-${pageItem.pageItemId}`} data={{
+                                payloadType,
+                                payloadKey,
+                            }} ItemComponent={AdsItem} />
+                            break;
+                        case Config.pageItemsType.BannerGroup:
+                            section = <RowList className="Banner" key={`page-section-${pageItem.pageItemId}`} data={{
+                                payloadType,
+                                payloadKey,
+                            }} ItemComponent={BannerItem} />
+                            break;
+                        default:
+                            section = undefined;
+                    }
+                    return section;
+                })}
+            <GoToTop />
+        </>
     )
 };
 
